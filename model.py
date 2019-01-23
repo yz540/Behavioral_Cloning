@@ -27,9 +27,9 @@ def generator(path, samples, batch_size=32):
             angles = []
             for batch_sample in batch_samples:
                 # read in images from center, left and right cameras
-                image_center = processImg(path + batch_sample[0].lstrip())
-                image_left = processImg(path + batch_sample[1].lstrip())
-                image_right = processImg(path + batch_sample[2].lstrip())
+                image_center = processImg(path + './IMG/'+ batch_sample[0].split('/')[-1])
+                image_left = processImg(path + './IMG/' + batch_sample[1].split('/')[-1])
+                image_right = processImg(path + './IMG/' + batch_sample[2].split('/')[-1])
                 images.extend([image_center, image_left, image_right])
                 
                 # steering angle for the center image_center
@@ -56,7 +56,7 @@ def load_data(path):
     samples = []
     with open(path + 'driving_log.csv') as csvfile:
         reader = csv.reader(csvfile)
-        next(reader, None) # skip header of sample data
+#         next(reader, None) # skip header of sample data
         for line in reader:
             samples.append(line)
     return samples
@@ -80,10 +80,10 @@ def nn_model(train_generator, validation_generator):
     model.fit_generator(train_generator, samples_per_epoch= len(train_samples), validation_data=validation_generator, nb_val_samples=len(validation_samples), nb_epoch=3)
     return model
 
-sample_data_path = "../../../opt/carnd_p3/data/"
+sample_data_path = "../../../opt/carnd_p3/train_data/"
 samples = load_data(sample_data_path)
 train_samples, validation_samples = train_test_split(samples, test_size=0.2)
 train_generator = generator(sample_data_path, train_samples, batch_size=32)
 validation_generator = generator(sample_data_path, validation_samples, batch_size=32)
 model = nn_model(train_generator, validation_generator)
-model.save('model.h5')  # creates a HDF5 file 'my_model.h5'
+model.save('model_train.h5')  # creates a HDF5 file 'my_model.h5'
