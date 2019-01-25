@@ -50,7 +50,7 @@ The model I used is a modified LeNet model. Compared to the LeNet model, I added
 The summary of the model is shown as follows.
 
 |Layer (type)        |         Output Shape       |       Param #   |
-|:---------------------:|:---------------------------------------------:| 
+|:---------------------|:---------------------------------------------:|:---------------------:|
 |lambda_1 (Lambda)    |        (None, 70, 320, 3)   |     0       |
 |conv2d_1 (Conv2D)    |       (None, 66, 316, 6)    |    456      |
 |max_pooling2d_1 (MaxPooling2) | (None, 33, 158, 6) |       0     |    
