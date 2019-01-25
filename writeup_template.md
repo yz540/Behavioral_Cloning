@@ -48,6 +48,7 @@ The model.py file contains the code for training and saving the convolution neur
 The model I used is a modified LeNet model. Compared to the LeNet model, I added the lambda_1 layer where data is normalized and two dropout layers to reduce overfitting, removed one fully-connected layer to decrease training time. The corresponding code is in the method nn_model() in model.py (lines 70-87).
 
 The summary of the model is shown as follows.
+
 |Layer (type)        |         Output Shape       |       Param #   |
 |:---------------------:|:---------------------------------------------:| 
 |lambda_1 (Lambda)    |        (None, 70, 320, 3)   |     0       |
