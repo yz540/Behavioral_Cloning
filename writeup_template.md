@@ -48,32 +48,22 @@ The model.py file contains the code for training and saving the convolution neur
 The model I used is a modified LeNet model. Compared to the LeNet model, I added the lambda_1 layer where data is normalized and two dropout layers to reduce overfitting, removed one fully-connected layer to decrease training time. The corresponding code is in the method nn_model() in model.py (lines 70-87).
 
 The summary of the model is shown as follows.
-_________________________________________________________________
-Layer (type)                 Output Shape              Param #   
-=================================================================
-lambda_1 (Lambda)            (None, 70, 320, 3)        0         
-_________________________________________________________________
-conv2d_1 (Conv2D)            (None, 66, 316, 6)        456       
-_________________________________________________________________
-max_pooling2d_1 (MaxPooling2 (None, 33, 158, 6)        0         
-_________________________________________________________________
-conv2d_2 (Conv2D)            (None, 29, 154, 6)        906       
-_________________________________________________________________
-max_pooling2d_2 (MaxPooling2 (None, 14, 77, 6)         0         
-_________________________________________________________________
-flatten_1 (Flatten)          (None, 6468)              0         
-_________________________________________________________________
-dropout_1 (Dropout)          (None, 6468)              0         
-_________________________________________________________________
-dense_1 (Dense)              (None, 84)                543396    
-_________________________________________________________________
-dropout_2 (Dropout)          (None, 84)                0         
-_________________________________________________________________
-dense_2 (Dense)              (None, 1)                 85        
-=================================================================
-Total params: 544,843
-Trainable params: 544,843
-Non-trainable params: 0
+|Layer (type)        |         Output Shape       |       Param #   |
+|:---------------------:|:---------------------------------------------:| 
+|lambda_1 (Lambda)    |        (None, 70, 320, 3)   |     0       |
+|conv2d_1 (Conv2D)    |       (None, 66, 316, 6)    |    456      |
+|max_pooling2d_1 (MaxPooling2) | (None, 33, 158, 6) |       0     |    
+|conv2d_2 (Conv2D)    |        (None, 29, 154, 6)    |    906     | 
+|max_pooling2d_2 (MaxPooling2) | (None, 14, 77, 6)  |       0     |  
+|flatten_1 (Flatten)  |        (None, 6468)          |    0       |  
+|dropout_1 (Dropout)  |        (None, 6468)          |    0       |  
+|dense_1 (Dense)      |        (None, 84)            |    543396  |  
+|dropout_2 (Dropout)  |        (None, 84)            |    0       |  
+|dense_2 (Dense)      |        (None, 1)             |    85      |  
+
+Total params: 544,843  
+Trainable params: 544,843  
+Non-trainable params: 0  
 
 #### 4. Appropriate training data
 I am not a good driver and often drive the car to water or grass, so I used the sample data provided by Udacity. To increase the training data, I used the images from centre, left and right cameras and flipped them all, which gives 6 times the original data.
@@ -97,11 +87,13 @@ To handle the turns, I collected additional around 1600 data by controlling the 
 
 The new data set is not good enough because I almost drive the car off the road using keyboard. So I decided to abandon my own data. Then I modified the model by adding two dropout layers to reduce overfitting. It worked and the overfitting is reasonably low, see the training loss and validation loss are very close. The accuracy didn't improve much from Epoch 2 to Epoch 3, so 3 epochs is the good enough choice for the training.
 
-Epoch 1/3
-6428/6428 [==============================] - 1308s - loss: 0.0176 - val_loss: 0.0160
-Epoch 2/3
-6428/6428 [==============================] - 1287s - loss: 0.0146 - val_loss: 0.0156
-Epoch 3/3
-6428/6428 [==============================] - 1285s - loss: 0.0142 - val_loss: 0.0153
+Epoch 1/3  
+6428/6428 [==============================] - 1308s - loss: 0.0176 - val_loss: 0.0160  
+Epoch 2/3  
+6428/6428 [==============================] - 1287s - loss: 0.0146 - val_loss: 0.0156  
+Epoch 3/3  
+6428/6428 [==============================] - 1285s - loss: 0.0142 - val_loss: 0.0153  
 
 At the end of the process, the vehicle is able to drive autonomously around the track without leaving the road.
+
+The Adam optimizer was used in the training, so no need to specify learning rate.
